@@ -1,0 +1,12 @@
+/**
+ * @author Naveen K Wodeyar
+ * @date 25-Jul-2024
+ */
+package com.ssm.domain;
+
+/**
+ * 
+ */
+public class PaymentState {
+
+}
