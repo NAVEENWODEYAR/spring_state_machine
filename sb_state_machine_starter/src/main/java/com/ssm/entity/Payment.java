@@ -1,7 +1,8 @@
 package com.ssm.entity;
 
 import java.math.BigDecimal;
-import com.ssm.domain.PaymentState;
+
+import com.ssm.enumconstants.PaymentState;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
