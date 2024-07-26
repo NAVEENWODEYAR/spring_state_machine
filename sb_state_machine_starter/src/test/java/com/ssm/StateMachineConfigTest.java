@@ -32,6 +32,8 @@ public class StateMachineConfigTest {
 		System.out.println(st.getState().toString());
 		st.sendEvent(PaymentEvent.PRE_AUTH_APPROVED);
 		System.out.println(st.getState().toString());
+		st.sendEvent(PaymentEvent.PRE_AUTH_DECLINED);
+		System.out.println(st.getState().toString());
 		
 		
 		
