@@ -1,7 +1,0 @@
-
-server:
-  port: 8786
-
-spring:
-  application:
-    name: SPRING_STATE_MACHINE

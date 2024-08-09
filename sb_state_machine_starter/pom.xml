@@ -78,6 +78,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${gro${project.groupId}-${project.name}-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
