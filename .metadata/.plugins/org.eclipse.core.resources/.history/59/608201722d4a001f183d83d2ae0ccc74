@@ -1,7 +1,0 @@
-
-server:
-  port: 8786
-
-spring:
-  application:
-    name: sb_state_machine_starter

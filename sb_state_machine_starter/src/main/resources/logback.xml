@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+
+	<properties>
+		<property name="log-path">../logs</property>
+		<property name="log-pattern">%d{yyyy-MM-dd HH:mm:ss,SSS} [%t][%-5p]%l-%m%x%X%n</property>
+	</properties>
+
+	<Appenders>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT">
+			<PatternLayout pattern="${log-pattern}"/>
+		</Console>
+	</Appenders>
+</Configuration>
