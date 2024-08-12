@@ -31,3 +31,30 @@ build/
 
 ### VS Code ###
 .vscode/
+
+## Compiled files, ##
+*.class  
+*.metadata 
+*../.metadata
+*.properties 
+*.yml
+*.metadata/.log
+*.metadata/.log
+*.markers.snap
+*./metadata
+*.snap
+
+
+# Ignore Eclipse metadata files
+*.metadata/
+
+# Ignore Git-related files
+*.gitignore
+# Ignore Eclipse metadata directory
+.metadata/
+.metadata/.plugins/org.eclipse.core.resources/.projects/.org.eclipse.egit.core.cmp/.markers.snap/
+.metadata/.log
+
+
+# Ignore project-specific settings
+unitANDintegration_testing/.gitignore

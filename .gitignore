@@ -38,3 +38,30 @@ build/
 *../.metadata
 *.properties 
 *.yml
+*.metadata/.log
+*.metadata/.log
+*.snap
+*./metadata
+
+# Ignore Eclipse metadata files
+.metadata/
+
+# Ignore Git-related files
+.gitignore
+
+# Ignore project-specific settings
+unitANDintegration_testing/.gitignore
+
+
+# Ignore Eclipse metadata files
+*.metadata/
+# Ignore Eclipse metadata directory
+.metadata/
+.metadata/.plugins/org.eclipse.core.resources/.projects/.org.eclipse.egit.core.cmp/.markers.snap/
+.metadata/.log
+
+# Ignore Git-related files
+*.gitignore
+
+# Ignore project-specific settings
+unitANDintegration_testing/.gitignore
