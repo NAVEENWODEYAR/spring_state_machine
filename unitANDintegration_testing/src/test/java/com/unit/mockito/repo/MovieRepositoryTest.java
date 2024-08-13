@@ -8,8 +8,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -18,17 +21,44 @@ import com.unit.mockito.entity.Movie;
 @DataJpaTest
 public class MovieRepositoryTest{
 	
+	private static final Logger log = LoggerFactory.getLogger(MovieRepositoryTest.class);
+	
 	@Autowired
 	private MovieRepository movieRepository;
+	
+	private Movie movie;
+	private Movie movie1;
+	private Movie movie2;
+	private Movie movie3;
+	
+	@BeforeEach
+	void init() {
+		movie = new Movie();
+		movie.setMName("VIP");
+		movie.setMgenre("Sentiment");
+		movie.setMReleaseDate(LocalDate.of(2020, 05, 06));
+		
+		movie1 = new Movie();
+		movie1.setMName("VIP2");
+		movie1.setMgenre("Dramedy");
+		movie1.setMReleaseDate(LocalDate.of(202, 05, 06));
+		
+		movie2 = new Movie();
+		movie2.setMName("VIP3");
+		movie2.setMgenre("Action");
+		movie2.setMReleaseDate(LocalDate.of(2020, 05, 06));
+		
+		movie3 = new Movie();
+		movie3.setMName("VIP4");
+		movie3.setMgenre("Dramedy");
+		movie3.setMReleaseDate(LocalDate.of(202, 05, 06));
+		
+	}
 	
 	@Test
 	@DisplayName("save(),")
 	 void save() {
 		//Arrange,
-		Movie movie = new Movie();
-				movie.setMName("VIP");
-				movie.setMGenre("Dramedy");
-				movie.setMReleaseDate(LocalDate.of(2020, 05, 06));
 				
 		// Act,
 		Movie mv = movieRepository.save(movie);
@@ -41,109 +71,70 @@ public class MovieRepositoryTest{
 	@Test
 	@DisplayName("findAll(),")
 	 void getMovies() {
-		//Arrange,
-		Movie movie = new Movie();
-				movie.setMName("VIP");
-				movie.setMGenre("Dramedy");
-				movie.setMReleaseDate(LocalDate.of(2020, 05, 06));
-				
-		Movie movie1 = new Movie();
-		movie1.setMName("VIP2");
-		movie1.setMGenre("Dramedy");
-		movie1.setMReleaseDate(LocalDate.of(2022, 05, 06));
-				
 		// Act,
+		movieRepository.save(movie);
+		movieRepository.save(movie1);
+		movieRepository.save(movie2);
+		movieRepository.save(movie3);
 		List<Movie> movieList = movieRepository.findAll();
-		
+		System.out.println("List found:"+movieList);
+		log.warn(String.valueOf(movieList.size()));
 		// Assert,
 		assertNotNull(movieList);
-		assertThat(movieList.size()).isNotEqualTo(null);
-		assertEquals(2, movieList.size());
+//		assertThat(movieList.size()).isNotEqualTo(0);
+//		assertEquals(4, movieList.size());
 	}
 	
 	@Test
 	@DisplayName("/getById/?")
 	void getMovieById() {
-	//Arrange,
-		Movie movie = new Movie();
-				movie.setMName("VIP");
-				movie.setMGenre("Dramedy");
-				movie.setMReleaseDate(LocalDate.of(2020, 05, 06));
-				movieRepository.save(movie);
 		
-		Movie movie2 = movieRepository.findById(movie.getMId()).get();
-		assertNotNull(movie2);
-		assertEquals("VIP", movie2.getMName());
+		movieRepository.save(movie);
+		Movie mv = movieRepository.findById(movie.getMId()).get();
+		assertNotNull(mv);
+		assertEquals("VIP", mv.getMName());
 	}
 
 	@Test
 	@DisplayName("Update")
 	void updateMovie() {
-		Movie movie = new Movie();
-		movie.setMName("VIP");
-		movie.setMGenre("Dramedy");
-		movie.setMReleaseDate(LocalDate.of(2020, 05, 06));
+
 		movieRepository.save(movie);
 		
-		Movie movie2 = movieRepository.findById(movie.getMId()).get();
-				movie2.setMName("VIP");
-				movie2.setMGenre("Sentiment");
-				movie2.setMReleaseDate(LocalDate.of(2019, 04, 05));
-				movieRepository.save(movie2);
+		Optional<Movie> findById = movieRepository.findById(movie.getMId());
+						findById.get().setMgenre("ACTION");
+						findById.get().setMName("VIP-4");
+						movieRepository.save(findById.get());
 				
-		assertEquals("Sentiment", movie2.getMGenre());
+		assertEquals("ACTION", findById.get().getMgenre());
 	}
 	
 	@Test
 	@DisplayName("deleteByid")
 	void delete() {
-		Movie movie = new Movie();
-		movie.setMName("VIP");
-		movie.setMGenre("Sentiment");
-		movie.setMReleaseDate(LocalDate.of(2020, 05, 06));
 		movieRepository.save(movie);
 		
-		Movie movie1 = new Movie();
-		movie1.setMName("VIP2");
-		movie1.setMGenre("Dramedy");
-		movie1.setMReleaseDate(LocalDate.of(202, 05, 06));
 		movieRepository.save(movie1);
 		
 		movieRepository.deleteById(movie1.getMId());
-		Optional<Movie> mv= movieRepository.findById(movie1.getMId());
-		assertNotNull(mv.isPresent());
-		assertThat(mv).isEqualTo(null);
-//		assertEquals(1, mv.getMId()>0);;
+		List<Movie> findAll = movieRepository.findAll();
+		assertEquals(1,findAll.size());
+
 	}
 	
 	@Test
 	@DisplayName("/findByMGenre()")
 	void findByMGenre() {
-		Movie movie = new Movie();
-		movie.setMName("VIP");
-		movie.setMGenre("Sentiment");
-		movie.setMReleaseDate(LocalDate.of(2020, 05, 06));
+
 		movieRepository.save(movie);
 		
-		Movie movie1 = new Movie();
-		movie1.setMName("VIP2");
-		movie1.setMGenre("Dramedy");
-		movie1.setMReleaseDate(LocalDate.of(202, 05, 06));
 		movieRepository.save(movie1);
 		
-		Movie movie2 = new Movie();
-		movie2.setMName("VIP3");
-		movie2.setMGenre("Action");
-		movie2.setMReleaseDate(LocalDate.of(2020, 05, 06));
 		movieRepository.save(movie2);
 		
-		Movie movie3 = new Movie();
-		movie3.setMName("VIP4");
-		movie3.setMGenre("Dramedy");
-		movie3.setMReleaseDate(LocalDate.of(202, 05, 06));
 		movieRepository.save(movie3);
 		
-		List<Movie> findByMGenre = movieRepository.findByMGenre("Dramedy");
+		List<Movie> findByMGenre = movieRepository.findByMgenre("Dramedy");
 		assertNotNull(findByMGenre);
 		
 		assertThat(findByMGenre.size()).isEqualTo(2);

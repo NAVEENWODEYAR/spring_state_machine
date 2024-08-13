@@ -26,7 +26,7 @@ public class Movie {
 	
 	private String mName;
 	
-	private String mGenre;
+	private String mgenre;
 	
 	private LocalDate mReleaseDate;
 	
