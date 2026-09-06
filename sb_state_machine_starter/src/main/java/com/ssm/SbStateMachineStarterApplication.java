@@ -8,7 +8,7 @@ public class SbStateMachineStarterApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SbStateMachineStarterApplication.class, args);
-		System.out.println("\nSPRING\n STATE\n MACHINE\n");
+		System.out.println("\n SPRING \n STATE \n MACHINE \n");
 	}
 
 }
