@@ -8,7 +8,7 @@ public class UnitAnDintegrationTestingApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UnitAnDintegrationTestingApplication.class, args);
-		System.out.println("\nUnit Testing,\nIntegration Testing,\nMockito framework,,");
+		System.out.println("\nUnit Testing,\nIntegration Testing \nMockito framework,,");
 	}
 
 }
