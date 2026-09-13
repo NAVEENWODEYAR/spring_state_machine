@@ -59,7 +59,7 @@ public class StateMachineConfig extends StateMachineConfigurerAdapter<PaymentSta
 	
 	public Action<PaymentState, PaymentEvent> preAuthAction(){
 		return context->{
-			System.out.println("PreAuth called");
+			System.out.println("PreAuth API called");
 			
 			if(new Random().nextInt(10)<8) {
 				System.out.println("Approved");
